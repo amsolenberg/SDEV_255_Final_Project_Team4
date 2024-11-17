@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "name": "Introduction to Programming",
+        "code": "CS101",
+        "description": "Learn the basics of programming.",
+        "credits": 3
+    },
+    {
+        "id": 2,
+        "name": "Data Structures",
+        "code": "CS201",
+        "description": "Study data organization and manipulation.",
+        "credits": 4
+    },
+    {
+        "id": 3,
+        "name": "Calculus I",
+        "code": "MATH101",
+        "description": "Introduction to calculus concepts.",
+        "credits": 4
+    },
+    {
+        "id": 4,
+        "name": "Algebra I",
+        "code": "MATH201",
+        "description": "Matrix theory and linear algebra.",
+        "credits": 3
+    },
+    {
+        "id": 5,
+        "name": "Physics I",
+        "code": "PHYS101",
+        "description": "Study of motion and forces.",
+        "credits": 4
+    },
+    {
+        "id": 6,
+        "name": "Physics II",
+        "code": "PHYS201",
+        "description": "Introduction to quantum and relativity theories.",
+        "credits": 4
+    },
+    {
+        "id": 7,
+        "name": "Literature I",
+        "code": "LIT101",
+        "description": "Explore works of Shakespeare.",
+        "credits": 3
+    },
+    {
+        "id": 8,
+        "name": "World History",
+        "code": "HIST101",
+        "description": "Survey of global historical events.",
+        "credits": 3
+    },
+    {
+        "id": 9,
+        "name": "American History",
+        "code": "HIST201",
+        "description": "Focus on the history of the United States.",
+        "credits": 3
+    },
+    {
+        "id": 10,
+        "name": "Advanced Programming",
+        "code": "CS301",
+        "description": "Learn advanced programming techniques.",
+        "credits": 4
+    }
+]
