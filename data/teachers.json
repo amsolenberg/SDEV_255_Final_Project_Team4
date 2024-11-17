@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Ash Williams",
+        "department": "Computer Science",
+        "email": "groovy@deaditehunter.com"
+    },
+    {
+        "id": 2,
+        "name": "Clarence Worley",
+        "department": "Mathematics",
+        "email": "cworley@romancerun.com"
+    },
+    {
+        "id": 3,
+        "name": "Marge Gunderson",
+        "department": "Physics",
+        "email": "marge@fargopd.org"
+    },
+    {
+        "id": 4,
+        "name": "Seth Brundle",
+        "department": "Literature",
+        "email": "brundlefly@telepodlabs.com"
+    },
+    {
+        "id": 5,
+        "name": "Jack Burton",
+        "department": "History",
+        "email": "jack@porkchopexpress.net"
+    }
+]
