@@ -1,0 +1,36 @@
+body {
+padding-left: 20px; background-color: rgb(17, 111, 142);
+}
+
+#planetpic img{
+    float: right;
+    border-radius:10px;
+    margin-right: 22px;
+    max-width: 30%;
+    height:auto;
+    
+}
+
+button {
+    background-color: black;
+    color: white
+
+}
+h2 {
+    font-family: 'Helvetica';
+    color: white;
+    font-size: 15px;   
+}
+
+
+label {
+    font-family: 'Helvetica';
+    color: white;
+    font-size: 15px;  
+
+}
+
+#hideThisPart{
+    display:None;
+    color:white;
+}
