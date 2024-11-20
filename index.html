@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+ 
+</head>
+<body>
+<h1>Welcome to the Best University on Rigel4!!</h1>
+
+<nav class="navbar navbar-expand-lg bg-primary navbar-light py-3 fixed-top">
+  <div class="container">
+    <a href="#" class="navbar-brand">Welcome to the Best University on Rigel4!!!</a>
+
+  </nav>
+  <br>
+  <br>
+  <br>
+<section id="planetpic">
+     <img src="RIGEL4.jpg" alt="Rigel4">
+</section>
+
+<div class="card text-white bg-dark mb-3" style="width: 60rem;">
+  <div class="card-body">
+    <h5 class="card-title">University of Rigel4</h5>
+    <h6 class="card-subtitle mb-2">Registration System</h6>
+    <p class="card-text"> We're glad you're here!!
+      We invite you to review our course descriptions for the upcoming semester!</p>
+      <a href="#" class="btn btn-primary">Read More</a>
+  </div>
+</div>
+<br>
+<br>
+
+<h2>List of things to do prior to registration:</h2>
+<input type="checkbox" id="Check1" name="Check1" value="CI1">
+<label for="Check1">  I. Check your degree progress</label><br>
+<input type="checkbox" id="Check2" name="Check2" value="CI2">
+<label for="Check2">  II. Check your financial aid status with the FA office if applicable</label><br>
+<input type="checkbox" id="Check3" name="Check3" value="CI3">
+<label for="Check3">  III. Meet with your advisor</label><br>
+<input type="checkbox" id="Check4" name="Check4" value="CI4">
+<label for="Check4">  IV. Sign up for classes using the links below</label><br>
+<br>
+<br>
+ 
+<a href="studentlogin.html">
+  <button>Student Login</button>
+</a>
+
+<br>
+<br>
+<br>
+<br>
+<button onclick="hideThis()">Instructors Only</button>
+
+<div id="hideThisPart" style="display:none"><p>
+Click this link for content relevant to instructors only
+<br>
+  <a href="instlogin.html">
+  <button>Instructor Login</button>
+  </a>
+</p>
+    
+</div>
+<script src="hide.js"></script>
+
+
+
+
+</body>
+</html>
