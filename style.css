@@ -1,5 +1,5 @@
 body {
-padding-left: 20px; background-color: rgb(17, 111, 142);
+padding-left: 20px; background-color:rgb(17, 111, 142)
 }
 
 #planetpic img{
@@ -11,15 +11,35 @@ padding-left: 20px; background-color: rgb(17, 111, 142);
     
 }
 
+#checkboxes{
+    font-size: 30px;
+    
+}
+#mappic img{
+    float: right;
+    border-radius:10px;
+    margin-right: 22px;
+    max-width: 30%;
+    height:auto;
+    
+}
+
+
 button {
     background-color: black;
-    color: white
+    color: white;
 
 }
 h2 {
     font-family: 'Helvetica';
     color: white;
     font-size: 15px;   
+}
+
+h3 {
+    font-family: 'Helvetica';
+    color: white;
+    font-size: 20px;   
 }
 
 
@@ -29,6 +49,29 @@ label {
     font-size: 15px;  
 
 }
+
+/* accordion card */
+details {
+    width: 80%;
+    border: none;
+    background-color:black;
+    color: white;
+  }
+  
+  /* accordion title */
+  summary {
+    color: white;
+    position: relative;
+    padding: 10px;
+    margin-bottom: 0;
+  }
+  
+  /* accordion content */
+  p.question {
+    border-top: solid 3px rgb(17, 111, 142);
+    padding: 10px;
+    color: white;
+  }
 
 #hideThisPart{
     display:None;
