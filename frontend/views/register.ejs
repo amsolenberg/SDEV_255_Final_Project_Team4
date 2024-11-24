@@ -27,72 +27,125 @@
   <body>
     <%- include('./partials/nav.ejs') %>
 
-    <main class="container py-5">
-      <section class="mb-5">
-        <div class="container form-container bg-dark rounded shadow p-4">
-          <h1 class="text-center">Register</h1>
-          <p class="text-center text-muted">
-            "Enroll today, tomorrow belongs to the groovy."
-          </p>
-          <form>
-            <div class="mb-3">
-              <label for="username" class="form-label">Username</label>
-              <input
-                type="text"
-                class="form-control"
-                id="username"
-                placeholder="Enter your username"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email address</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                placeholder="Enter your email"
-                required
-              />
-              <div class="form-text">
-                We promise not to spam you (too much).
-              </div>
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                placeholder="Create a password"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="confirm-password" class="form-label"
-                >Confirm Password</label
-              >
-              <input
-                type="password"
-                class="form-control"
-                id="confirm-password"
-                placeholder="Re-enter your password"
-                required
-              />
-            </div>
-            <div class="d-grid">
-              <button type="submit" class="btn btn-custom btn-lg">
-                Register
-              </button>
-            </div>
-            <p class="mt-3 text-center">
-              Already have an account?
-              <a href="/login" class="text-decoration-none">Login</a>
-            </p>
-          </form>
+    <main class="container my-5">
+      <h1 class="text-center">Register</h1>
+      <form
+        method="POST"
+        class="bg-dark text-white p-4 rounded"
+        id="registration-form"
+      >
+        <div class="form-group mb-3">
+          <label for="first_name">First Name</label>
+          <input
+            type="text"
+            id="first_name"
+            name="first_name"
+            class="form-control"
+            required
+          />
         </div>
-      </section>
+        <div class="form-group mb-3">
+          <label for="last_name">Last Name</label>
+          <input
+            type="text"
+            id="last_name"
+            name="last_name"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="user_type">I am a:</label>
+          <select id="user_type" name="user_type" class="form-select" required>
+            <option value="student">Student</option>
+            <option value="faculty">Faculty</option>
+          </select>
+        </div>
+        <div id="student-fields" class="mb-3 d-none">
+          <label for="major" class="form-label">Major</label>
+          <input type="text" id="major" name="major" class="form-control" />
+        </div>
+        <div id="faculty-fields" class="mb-3 d-none">
+          <label for="department" class="form-label">Department</label>
+          <input
+            type="text"
+            id="department"
+            name="department"
+            class="form-control"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
     </main>
+
+    <script>
+      const userTypeSelect = document.getElementById("user_type");
+      const studentFields = document.getElementById("student-fields");
+      const facultyFields = document.getElementById("faculty-fields");
+
+      userTypeSelect.addEventListener("change", () => {
+        if (userTypeSelect.value === "student") {
+          studentFields.classList.remove("d-none");
+          facultyFields.classList.add("d-none");
+        } else if (userTypeSelect.value === "faculty") {
+          facultyFields.classList.remove("d-none");
+          studentFields.classList.add("d-none");
+        } else {
+          studentFields.classList.add("d-none");
+          facultyFields.classList.add("d-none");
+        }
+      });
+
+      document
+        .getElementById("registration-form")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const formData = new FormData(event.target);
+          const data = Object.fromEntries(formData.entries());
+
+          try {
+            const response = await fetch("/api/register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+              alert("Registration successful!");
+              window.location.href = "/login";
+            } else {
+              const errorText = await response.text();
+              console.error("Registration failed:", errorText);
+              alert("Registration failed. Please try again.");
+            }
+          } catch (error) {
+            console.error("Error during registration:", error);
+            alert("An error occurred. Please try again.");
+          }
+        });
+    </script>
+
     <%- include('./partials/footer.ejs') %>
   </body>
 </html>

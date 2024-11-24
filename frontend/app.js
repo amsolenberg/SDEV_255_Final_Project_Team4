@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const port = 8080;
+const backendRouter = require("../backend/server");
+app.use("/api", backendRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
@@ -24,7 +26,9 @@ app.get("/register", (req, res) => {
 
 app.get("/available-courses", async (req, res) => {
   try {
-    const response = await fetch("http://backend:3000/api/courses");
+    const response = await fetch(
+      `${req.protocol}://${req.headers.host}/api/courses`
+    );
     const courses = await response.json();
 
     res.render("available-courses", { title: "Courses", courses, error: null });

@@ -2,42 +2,66 @@
 name: school-registration
 
 services:
-  frontend:
-    container_name: frontend
+  # frontend:
+  #   container_name: frontend
+  #   image: node:23
+  #   restart: unless-stopped
+  #   working_dir: /app
+  #   env_file: ./frontend/frontend.env
+  #   command: >
+  #     sh -c "npm install && npm start"
+  #   volumes:
+  #     - ./frontend:/app
+  #     - /app/node_modules
+  #   networks:
+  #     - frontend
+  #     - backend
+  #   ports:
+  #     - ${FRONTEND:-8080}:8080
+  #   depends_on:
+  #     - backend
+
+  # backend:
+  #   container_name: backend
+  #   restart: unless-stopped
+  #   image: node:23
+  #   working_dir: /app
+  #   env_file: ./backend/backend.env
+  #   command: >
+  #     sh -c "npm install && npm start"
+  #   volumes:
+  #     - ./backend:/app
+  #     - /app/node_modules
+  #   networks:
+  #     - backend
+  #   ports:
+  #     - ${BACKEND:-3000}:3000
+  #   depends_on:
+  #     - database
+
+  app:
+    container_name: school-registration
     image: node:23
     restart: unless-stopped
     working_dir: /app
-    env_file: ./frontend/frontend.env
+    env_file:
+      - ./frontend/frontend.env
+      - ./backend/backend.env
     command: >
-      sh -c "npm install && npm start"
+      sh -c "npm install -g concurrently && npm install --prefix ./frontend && npm install --prefix ./backend && concurrently \"npm start --prefix ./frontend\" \"npm start --prefix ./backend\""
     volumes:
-      - ./frontend:/app
+      - ./frontend:/app/frontend
+      - ./backend:/app/backend
       - /app/node_modules
     networks:
       - frontend
       - backend
     ports:
       - ${FRONTEND:-8080}:8080
-    depends_on:
-      - backend
-
-  backend:
-    container_name: backend
-    restart: unless-stopped
-    image: node:23
-    working_dir: /app
-    env_file: ./backend/backend.env
-    command: >
-      sh -c "npm install && npm start"
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-    networks:
-      - backend
-    ports:
       - ${BACKEND:-3000}:3000
     depends_on:
       - database
+
 
   database:
     container_name: database
