@@ -1,0 +1,12 @@
+services:
+  school-registration:
+    container_name: school-registration
+    image: node:latest
+    working_dir: /app
+    command: >
+      sh -c "npm install && npm install -g nodemon && nodemon app.js"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - 8080:8080
