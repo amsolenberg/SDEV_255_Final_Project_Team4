@@ -1,69 +1,35 @@
 [
   {
-    "id": 1,
-    "name": "Chainsaw Maintenance 101",
-    "code": "ENG101",
-    "description": "Learn to keep your trusty tools in top shape, with hands-on instruction by top experts.",
-    "credits": 3
-  },
-  {
-    "id": 2,
-    "name": "Heroism and One-Liners",
-    "code": "HUM101",
-    "description": "Master the art of witty retorts and heroic moments under pressure.",
-    "credits": 3
-  },
-  {
-    "id": 3,
-    "name": "Intro to Interdimensional Studies",
-    "code": "SCI201",
-    "description": "Discover the secrets of the multiverse and prepare for intergalactic opportunities.",
-    "credits": 4
-  },
-  {
-    "id": 4,
-    "name": "S-Mart Business Fundamentals",
-    "code": "BUS101",
-    "description": "Learn retail business basics and advanced inventory control strategies.",
-    "credits": 3
-  },
-  {
-    "id": 5,
     "name": "Mythology: From Deadites to Demigods",
     "code": "LIT301",
     "description": "Explore ancient myths, legends, and supernatural lore.",
     "credits": 3
   },
   {
-    "id": 6,
     "name": "Combat Dynamics and Physics",
     "code": "PHYS101",
     "description": "Understand the science behind motion, force, and those epic leaps.",
     "credits": 4
   },
   {
-    "id": 7,
     "name": "Surviving the Apocalypse 101",
     "code": "SUR101",
     "description": "Learn essential survival skills for any post-apocalyptic scenario.",
     "credits": 3
   },
   {
-    "id": 8,
     "name": "Intro to Boomstick Engineering",
     "code": "ENG201",
     "description": "Design, maintain, and perfect your very own boomstick.",
     "credits": 4
   },
   {
-    "id": 9,
     "name": "Time Travel Ethics and Etiquette",
     "code": "PHIL101",
     "description": "Delve into the moral dilemmas of tampering with the space-time continuum.",
     "credits": 3
   },
   {
-    "id": 10,
     "name": "Practical Spellcasting for Beginners",
     "code": "MAG101",
     "description": "Learn the basics of magic, from incantations to binding ancient evils.",

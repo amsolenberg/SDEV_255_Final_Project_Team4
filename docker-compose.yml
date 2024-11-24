@@ -1,12 +1,54 @@
+name: school-registration
+
 services:
-  school-registration:
-    container_name: school-registration
-    image: node:latest
+  frontend:
+    container_name: frontend
+    image: node:23
+    restart: unless-stopped
     working_dir: /app
+    env_file: ./frontend/frontend.env
     command: >
-      sh -c "npm install && npm install -g nodemon && nodemon app.js"
+      sh -c "npm install && npm start"
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    networks:
+      - frontend
+      - backend
     ports:
-      - 8080:8080
+      - ${FRONTEND:-8080}:8080
+    depends_on:
+      - backend
+
+  backend:
+    container_name: backend
+    restart: unless-stopped
+    image: node:23
+    working_dir: /app
+    env_file: ./backend/backend.env
+    command: >
+      sh -c "npm install && npm start"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - backend
+    ports:
+      - ${BACKEND:-3000}:3000
+    depends_on:
+      - database
+
+  database:
+    container_name: database
+    image: postgres:${POSTGRESQL_VERSION:-latest}
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    shm_size: 128mb
+    env_file: ./backend/postgresql.env
+    volumes:
+      - ./backend/postgresql:/var/lib/postgresql/data
+    networks:
+      - backend
+    ports:
+      - ${DATABASE:-5432}:5432

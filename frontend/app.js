@@ -21,3 +21,15 @@ app.get("/login", (req, res) => {
 app.get("/register", (req, res) => {
   res.render("register", { title: "Registration" });
 });
+
+app.get("/available-courses", async (req, res) => {
+  try {
+    const response = await fetch("http://backend:3000/api/courses");
+    const courses = await response.json();
+
+    res.render("available-courses", { title: "Courses", courses });
+  } catch (error) {
+    console.error("Error fetching courses:", error);
+    res.status(500).send("Could not load courses");
+  }
+});

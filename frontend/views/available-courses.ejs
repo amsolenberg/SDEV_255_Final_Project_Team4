@@ -1,0 +1,26 @@
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+    }
+  </style>
+  <body>
+    <%- include('./partials/nav.ejs') %>
+
+    <h1>Available Courses</h1>
+    <ul>
+      <% courses.forEach(course => { %>
+      <li>
+        <h3><%= course.name %></h3>
+        <p><strong>Code:</strong> <%= course.code %></p>
+        <p><strong>Description:</strong> <%= course.description %></p>
+        <p><strong>Credits</strong> <%= course.credits %></p>
+      </li>
+      <% }) %>
+    </ul>
+
+    <%- include('./partials/footer.ejs') %>
+  </body>
+</html>
