@@ -18,5 +18,12 @@
     crossorigin="anonymous"
   />
   <link rel="stylesheet" href="/styles.css" />
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const navbar = document.querySelector(".navbar");
+      const body = document.querySelector("body");
+      body.style.paddingTop = `${navbar.offsetHeight}px`;
+    })
+  </script>
   <title>Boomstick Academy | <%= title %></title>
 </head>
