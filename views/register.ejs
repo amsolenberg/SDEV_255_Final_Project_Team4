@@ -1,0 +1,98 @@
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+    }
+    .form-container {
+      margin-top: 100px;
+      max-width: 600px;
+    }
+    .form-container h1 {
+      font-family: "Arial", sans-serif;
+      font-weight: bold;
+    }
+    .btn-custom {
+      background-color: #4caf50;
+      border: none;
+    }
+    .btn-custom:hover {
+      background-color: #45a049;
+    }
+    .form-text {
+      color: #aaa;
+    }
+  </style>
+  <body>
+    <%- include('./partials/nav.ejs') %>
+
+    <main class="container py-5">
+      <section class="mb-5">
+        <div class="container form-container bg-dark rounded shadow p-4">
+          <h1 class="text-center">Register</h1>
+          <p class="text-center text-muted">
+            "Enroll today, tomorrow belongs to the groovy."
+          </p>
+          <form>
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="Enter your username"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Enter your email"
+                required
+              />
+              <div class="form-text">
+                We promise not to spam you (too much).
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Create a password"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="confirm-password" class="form-label"
+                >Confirm Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="confirm-password"
+                placeholder="Re-enter your password"
+                required
+              />
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-custom btn-lg">
+                Register
+              </button>
+            </div>
+            <p class="mt-3 text-center">
+              Already have an account?
+              <a href="/login" class="text-decoration-none">Login</a>
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
+    <%- include('./partials/footer.ejs') %>
+  </body>
+</html>
