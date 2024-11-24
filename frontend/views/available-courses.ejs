@@ -9,17 +9,35 @@
   <body>
     <%- include('./partials/nav.ejs') %>
 
-    <h1>Available Courses</h1>
-    <ul>
-      <% courses.forEach(course => { %>
-      <li>
-        <h3><%= course.name %></h3>
-        <p><strong>Code:</strong> <%= course.code %></p>
-        <p><strong>Description:</strong> <%= course.description %></p>
-        <p><strong>Credits</strong> <%= course.credits %></p>
-      </li>
-      <% }) %>
-    </ul>
+    <main
+      class="container d-flex justify-content-center align-items-center"
+      style="min-height: 80vh"
+    >
+      <div class="card shadow p-4 bg-dark" style="width: 100%">
+        <h2 class="card-title text-center fw-bold mb-4">Available Courses</h2>
+
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Course Name</th>
+              <th scope="col">Code</th>
+              <th scope="col">Description</th>
+              <th scope="col">Credits</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% courses.forEach(course => { %>
+            <tr>
+              <th scope="row"><%= course.name %></th>
+              <td><%= course.code %></td>
+              <td><%= course.description %></td>
+              <td><%= course.credits %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </main>
 
     <%- include('./partials/footer.ejs') %>
   </body>
