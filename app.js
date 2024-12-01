@@ -1,5 +1,5 @@
 const express = require('express');
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 const path = require('path');
 
 const connectToDB = require('./db');
@@ -9,23 +9,23 @@ const routes = require('./routes');
 const app = express();
 const port = 3000;
 
-const result = dotenv.config();
+// const result = dotenv.config();
 
-if (result.error) {
-    console.error('Failed to load .env file:', result.error);
-    process.exit(1);
-} else {
-    console.log('Loaded environment variables from .env');
-}
+// if (result.error) {
+//     console.error('Failed to load .env file:', result.error);
+//     process.exit(1);
+// } else {
+//     console.log('Loaded environment variables from .env');
+// }
 
-const requiredVars = ['DB_HOST', 'DB_USER', 'DB_PASS', 'DB_NAME', 'SESSION_SECRET'];
-const missingVars = requiredVars.filter((key) => !process.env[key]);
-if (missingVars.length > 0) {
-    console.error(
-        `Missing required environment variables: ${missingVars.join(', ')}`
-    );
-    process.exit(1);
-}
+// const requiredVars = ['DB_HOST', 'DB_USER', 'DB_PASS', 'DB_NAME', 'SESSION_SECRET'];
+// const missingVars = requiredVars.filter((key) => !process.env[key]);
+// if (missingVars.length > 0) {
+//     console.error(
+//         `Missing required environment variables: ${missingVars.join(', ')}`
+//     );
+//     process.exit(1);
+// }
 
 configureMiddlewares(app);
 
