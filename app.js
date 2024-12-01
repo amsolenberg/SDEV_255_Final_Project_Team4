@@ -9,20 +9,16 @@ const routes = require('./routes');
 const app = express();
 const port = 3000;
 
-const loadEnvFile = (filename) => {
-    const filePath = path.resolve(__dirname, 'env', filename);
-    const result = dotenv.config({path: filePath});
-    if (result.error) {
-        console.error(`Failed to load ${filename}:`, result.error);
-    } else {
-        console.log(`Loaded environment variables from ${filename}`);
-    }
-};
+const result = dotenv.config();
 
-loadEnvFile('database.env');
-loadEnvFile('app.env');
+if (result.error) {
+    console.error('Failed to load .env file:', result.error);
+    process.exit(1);
+} else {
+    console.log('Loaded environment variables from .env');
+}
 
-const requiredVars = ['DB_HOST', 'DB_USER', 'DB_PASS', 'DB_NAME'];
+const requiredVars = ['DB_HOST', 'DB_USER', 'DB_PASS', 'DB_NAME', 'SESSION_SECRET'];
 const missingVars = requiredVars.filter((key) => !process.env[key]);
 if (missingVars.length > 0) {
     console.error(
