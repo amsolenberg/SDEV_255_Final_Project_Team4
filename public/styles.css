@@ -1,0 +1,40 @@
+/*html,*/
+/*body {*/
+/*  height: 100%;*/
+/*  margin: 0;*/
+/*}*/
+
+/*body {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  padding-top: 60px;*/
+/*}*/
+/*main {*/
+/*  flex: 1;*/
+/*}*/
+/*footer {*/
+/*  background-color: #121212;*/
+/*  color: white;*/
+/*  text-align: center;*/
+/*  padding: 1rem;*/
+/*}*/
+
+.navbar-logo {
+    width: 75px;
+    height: auto;
+}
+
+.navbar-brand,
+.navbar-text {
+    margin: 0;
+    line-height: 1;
+}
+
+.navbar-brand {
+    font-size: 2.5rem;
+}
+
+.navbar-text {
+    font-size: 1.5rem;
+    /* margin-top: -5px; */
+}

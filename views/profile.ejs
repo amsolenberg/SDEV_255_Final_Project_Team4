@@ -1,0 +1,127 @@
+<html>
+<%- include('./partials/head.ejs') %>
+<body>
+<%- include('./partials/nav.ejs') %>
+<% if (success && success.length > 0)
+{ %>
+    <div class="alert alert-success"><%= success %></div>
+<% } %>
+<% if (error && error.length > 0) { %>
+    <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h4 class="card-title text-center fw-bold mb-3">User Information</h4>
+                    <p><strong>First Name:</strong> <%= user.firstName %></p>
+                    <p><strong>Last Name:</strong> <%= user.lastName %></p>
+                    <p><strong>Email:</strong> <%= user.email %></p>
+
+                    <form action="/profile/email-update" method="POST" class="mt-4">
+                        <h5 class="fw-bold">Update Email</h5>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">New Email</label>
+                            <input
+                                    type="email"
+                                    class="form-control"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Enter new email"
+                                    required
+                            />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Update Email</button>
+                    </form>
+
+                    <form action="/profile/password-change" method="POST" class="mt-4">
+                        <h5 class="fw-bold">Change Password</h5>
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label">Current Password</label>
+                            <input
+                                    type="password"
+                                    class="form-control"
+                                    id="currentPassword"
+                                    name="currentPassword"
+                                    placeholder="Enter current password"
+                                    required
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">New Password</label>
+                            <input
+                                    type="password"
+                                    class="form-control"
+                                    id="newPassword"
+                                    name="newPassword"
+                                    placeholder="Enter new password"
+                                    required
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input
+                                    type="password"
+                                    class="form-control"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    placeholder="Confirm new password"
+                                    required
+                            />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Change Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h4 class="card-title text-center fw-bold mb-3">
+                        <% if (user.userType === 'student') { %>
+                            Enrolled Classes
+                        <% } else if (user.userType === 'faculty') { %>
+                            Associated Courses
+                        <% } %>
+                    </h4>
+
+                    <% if (associatedData.length > 0) { %>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Class Name</th>
+                                <th>Code</th>
+                                <th>Credits</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% associatedData.forEach(data => { %>
+                                <tr>
+                                    <td><%= data.name %></td>
+                                    <td><%= data.code %></td>
+                                    <td><%= data.credits %></td>
+                                </tr>
+                            <% }); %>
+                            </tbody>
+                        </table>
+                    <% } else { %>
+                        <p class="text-center text-muted">
+                            <% if (user.userType === 'student') { %>
+                                You are not enrolled in any courses.
+                            <% } else if (user.userType === 'faculty') { %>
+                                You are not associated with any courses.
+                            <% } %>
+                        </p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include('./partials/footer.ejs') %>
+</body>
+</html>

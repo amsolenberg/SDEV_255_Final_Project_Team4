@@ -1,0 +1,110 @@
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+<body>
+<%- include('./partials/nav.ejs') %>
+<% if (success && success.length > 0)
+{ %>
+    <div class="alert alert-success"><%= success %></div>
+<% } %>
+<% if (error && error.length > 0) { %>
+    <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<main class="container d-flex justify-content-center align-items-center py-5" style="min-height: 80vh">
+    <div class="card shadow p-4" style="width: 100%; max-width: 400px">
+        <h2 class="card-title text-center fw-bold mb-4">Register</h2>
+        <form action="/register" method="POST" id="registrationForm">
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" name="firstName"
+                       placeholder="Enter your first name" required>
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name"
+                       required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address"
+                       required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+            </div>
+            <div class="mb-3">
+                <label for="userType">I am a:</label>
+                <select name="userType" id="userType" class="form-select" required>
+                    <option value="">Select an option</option>
+                    <option value="student">Student</option>
+                    <option value="faculty">Faculty</option>
+                </select>
+            </div>
+            <div id="studentFields" class="mb-3 d-none">
+                <label for="major" class="form-label">Major</label>
+                <input type="text" class="form-control" id="major" name="major" placeholder="Enter your major">
+            </div>
+            <div id="facultyFields" class="mb-3 d-none">
+                <label for="department" class="form-label">Department</label>
+                <input type="text" class="form-control" id="department" name="department"
+                       placeholder="Enter your department">
+            </div>
+            <button class="btn btn-primary w-100" type="submit">Register</button>
+        </form>
+    </div>
+</main>
+
+<script>
+    const userTypeSelect = document.getElementById('userType');
+    const studentFields = document.getElementById('studentFields');
+    const facultyFields = document.getElementById('facultyFields');
+
+    userTypeSelect.addEventListener('change', function () {
+        if (userTypeSelect.value === 'student') {
+            studentFields.classList.remove('d-none');
+            facultyFields.classList.add('d-none');
+        } else if (userTypeSelect.value === 'faculty') {
+            studentFields.classList.add('d-none');
+            facultyFields.classList.remove('d-none');
+        } else {
+            studentFields.classList.add('d-none');
+            facultyFields.classList.add('d-none');
+        }
+    });
+
+    document.getElementById('registrationForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch(`/register`, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {"Content-Type": "application/json"}
+            });
+
+            if (response.ok) {
+                alert('Successfully Registered');
+                window.location.href = '/login';
+            } else {
+                const errorText = await response.text();
+                console.error('Registration failed:', errorText);
+                alert('Registration failed. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error during registration:', error);
+            alert('An error occured. Please try again.');
+        }
+    });
+</script>
+
+<%- include('./partials/footer.ejs') %>
+</body>
+</html>

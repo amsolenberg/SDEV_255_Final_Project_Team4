@@ -1,0 +1,19 @@
+<html>
+<%- include('./partials/head.ejs') %>
+<body>
+<%- include('./partials/nav.ejs') %>
+<% if (success && success.length > 0)
+{ %>
+    <div class="alert alert-success"><%= success %></div>
+<% } %>
+<% if (error && error.length > 0) { %>
+    <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<div class="not-found-content">
+    Well, this is embarrassing. This page seems to be missing.
+</div>
+
+<%- include('./partials/footer.ejs') %>
+</body>
+</html>

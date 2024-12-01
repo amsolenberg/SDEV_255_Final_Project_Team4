@@ -1,0 +1,127 @@
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+<body>
+<%- include('./partials/nav.ejs') %>
+<% if (success && success.length > 0)
+{ %>
+    <div class="alert alert-success"><%= success %></div>
+<% } %>
+<% if (error && error.length > 0) { %>
+    <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<section class="hero bg-dark text-white text-center py-5">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Welcome to Boomstick Academy</h1>
+        <p class="lead">
+            Where learning leaves a mark and excellence meets wit.
+        </p>
+        <a href="/register" class="btn btn-primary btn-lg mt-3"
+        >Join the Boomstick Legacy</a
+        >
+    </div>
+</section>
+
+<section class="about py-5 bg-light">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-4">About Boomstick Academy</h2>
+        <p class="lead">
+            Established by visionaries who believed in making an impact
+            (sometimes literally), Boomstick Academy offers a unique learning
+            experience. From expert instructors to cutting-edge courses, we're
+            preparing students for whatever the galaxy throws their way.
+        </p>
+        <p>
+            Join us for the adventure of a lifetime—because at Boomstick
+            Academy, you don’t just learn. You make history.
+        </p>
+    </div>
+</section>
+
+<section class="courses py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-4">Featured Courses</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Chainsaw Maintenance 101</h5>
+                        <p class="card-text">
+                            Learn to keep your trusty tools in top shape, with hands-on
+                            instruction by top experts.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Intro to Interdimensional Studies</h5>
+                        <p class="card-text">
+                            Discover the secrets of the multiverse and prepare for
+                            intergalactic opportunities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Witty Heroics 101</h5>
+                        <p class="card-text">
+                            Master the art of witty retorts and heroic moments under
+                            pressure.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials bg-dark text-white py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-4">Student Testimonials</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <blockquote class="blockquote">
+                    <p>
+                        "Boomstick Academy changed my life. I went from a nobody to
+                        the galaxy's most sought-after chainsaw expert."
+                    </p>
+                    <footer class="blockquote-footer text-white">Ash W.</footer>
+                </blockquote>
+            </div>
+            <div class="col-md-4">
+                <blockquote class="blockquote">
+                    <p>
+                        "The interdimensional studies class gave me the confidence to
+                        boldly go where no one has gone before."
+                    </p>
+                    <footer class="blockquote-footer text-white">Marge G.</footer>
+                </blockquote>
+            </div>
+            <div class="col-md-4">
+                <blockquote class="blockquote">
+                    <p>
+                        "The one-liner class? Worth every credit. Now my enemies fear
+                        me and my friends envy me."
+                    </p>
+                    <footer class="blockquote-footer text-white">Jack B.</footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta py-5 bg-primary text-white text-center">
+    <div class="container">
+        <h2 class="fw-bold">Ready to Make Your Mark?</h2>
+        <p>Join Boomstick Academy today and leave your legacy.</p>
+        <a href="/register" class="btn btn-light btn-lg mt-3">Apply Now</a>
+    </div>
+</section>
+
+<%- include('./partials/footer.ejs') %>
+</body>
+</html>

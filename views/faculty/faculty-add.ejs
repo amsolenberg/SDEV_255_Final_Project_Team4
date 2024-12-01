@@ -1,0 +1,39 @@
+<html>
+<%- include('../partials/head.ejs') %>
+<body>
+<%- include('../partials/nav.ejs') %>
+<% if (success && success.length > 0)
+{ %>
+    <div class="alert alert-success"><%= success %></div>
+<% } %>
+<% if (error && error.length > 0) { %>
+    <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<main class="container py-5">
+    <h1 class="text-center mb-4">Add Faculty</h1>
+
+    <form action="/faculty/faculty/add" method="POST">
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" required>
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Faculty</button>
+    </form>
+</main>
+
+<%- include('../partials/footer.ejs') %>
+</body>
+</html>

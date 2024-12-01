@@ -1,0 +1,50 @@
+<html>
+<%- include('../partials/head.ejs') %>
+<body>
+<%- include('../partials/nav.ejs') %>
+<% if (success && success.length > 0)
+{ %>
+    <div class="alert alert-success"><%= success %></div>
+<% } %>
+<% if (error && error.length > 0) { %>
+    <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<main class="container py-5">
+    <h1 class="text-center mb-4">Manage Faculty</h1>
+
+    <div class="text-end mb-3">
+        <a href="/faculty/faculty/add" class="btn btn-primary">Add New Faculty</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% facultyList.forEach(faculty => { %>
+            <tr>
+                <td><%= faculty.firstName %></td>
+                <td><%= faculty.lastName %></td>
+                <td><%= faculty.email %></td>
+                <td>
+                    <a href="/faculty/faculty/edit/<%= faculty._id %>" class="btn btn-sm btn-warning">Edit</a>
+                    <form action="/faculty/faculty/delete/<%= faculty._id %>" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</main>
+
+
+<%- include('../partials/footer.ejs') %>
+</body>
+</html>

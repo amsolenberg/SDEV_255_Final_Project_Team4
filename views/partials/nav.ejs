@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <img
+                        src="/boomstick-logo.webp"
+                        alt="Boomstick Academy Logo"
+                        class="navbar-logo"
+                />
+            </div>
+            <div class="col">
+                <a href="/" class="navbar-brand">Boomstick Academy</a>
+                <p class="navbar-text">Learning that leaves a mark!</p>
+            </div>
+        </div>
+    </div>
+
+    <button
+            type="button"
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#navmenu"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <% if (user && user.userType === 'faculty') { %>
+        <%- include('./nav-faculty') %>
+    <% } else if (user && user.userType === 'student') { %>
+        <%- include('./nav-student') %>
+    <% } else { %>
+    <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a href="/courses/list" class="nav-link">Courses</a>
+            </li>
+            <li class="nav-item">
+                <a href="/login" class="nav-link">Login</a>
+            </li>
+            <li class="nav-item">
+                <a href="/register" class="nav-link">Register</a>
+            </li>
+        </ul>
+    </div>
+    <% } %>
+</nav>
+
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+></script>

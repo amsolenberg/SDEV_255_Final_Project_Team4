@@ -1,0 +1,63 @@
+<html>
+<%- include('../partials/head.ejs') %>
+<body>
+<%- include('../partials/nav.ejs') %>
+<% if (success && success.length > 0)
+{ %>
+    <div class="alert alert-success"><%= success %></div>
+<% } %>
+<% if (error && error.length > 0) { %>
+    <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<main class="container py-5">
+    <h1 class="text-center mb-4">Manage Students</h1>
+
+    <div class="text-end mb-3">
+        <a href="/faculty/students/add" class="btn btn-primary">Add New Student</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Major</th>
+            <th>Enrolled Courses</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% students.forEach(student => { %>
+            <tr>
+                <td><%= student.user.firstName %></td>
+                <td><%= student.user.lastName %></td>
+                <td><%= student.user.email %></td>
+                <td><%= student.major %></td>
+                <td>
+                    <% if (student.enrollments.length > 0) { %>
+                        <ul>
+                            <% student.enrollments.forEach(enrollment => { %>
+                                <li><%= enrollment.course.name %></li>
+                            <% }); %>
+                        </ul>
+                    <% } else { %>
+                        <span class="text-muted">Not enrolled in any courses</span>
+                    <% } %>
+                </td>
+                <td>
+                    <a href="/faculty/students/edit/<%= student._id %>" class="btn btn-sm btn-warning">Edit</a>
+                    <form action="/faculty/students/delete/<%= student._id %>" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</main>
+
+<%- include('../partials/footer.ejs') %>
+</body>
+</html>
