@@ -15,7 +15,7 @@ services:
     networks:
       - school-registration_net
     ports:
-      - "8080:8080"
+      - "8080:3000"
 
   school-registration_db:
     container_name: school-registration_db

@@ -1,8 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const User = require('../models/User');
-const Student = require('../models/Student');
-const Faculty = require('../models/Faculty');
+const User = require('../models/user');
+const Student = require('../models/student');
+const Faculty = require('../models/faculty');
 
 const router = express.Router();
 

@@ -1,8 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const User = require('../models/User');
-const Student = require('../models/Student');
-const Course = require('../models/Course');
+const User = require('../models/user');
+const Student = require('../models/student');
+const Course = require('../models/course');
 
 const isAuthenticated = require('../middleware/auth');
 
