@@ -1,35 +1,39 @@
-#running at https://sdev255g4.solnet.dev
-name: school-registration
-
 services:
-  school-registration:
-    container_name: school-registration
-    image: node:23
+  app:
+    container_name: boomstick-academy-app
+    image: boomstick-academy
     restart: unless-stopped
-    working_dir: /app
-    command: >
-      sh -c "npm install && npm start"
-    volumes:
-      - .:/app
-      - /app/node_modules
+    environment:
+      SESSION_SECRET: ${SESSION_SECRET}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
     networks:
-      - school-registration_net
+      - boom_net
     ports:
-      - "8080:3000"
+      - ${APP_3000:-3000}:3000
+    depends_on:
+      - db
 
-  school-registration_db:
-    container_name: school-registration_db
-    image: mongo
+  db:
+    container_name: boomstick-academy-db
+    image: mongo:${MONGO_VERSION:-latest}
     restart: unless-stopped
-    env_file:
-      - ./env/mongo.env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
     volumes:
-      - ./database:/data/db
+      - mongo-data:/data/db
     networks:
-      - school-registration_net
+      - boom_net
     ports:
-      - "27019:27017"
+      - ${MONGO_27017:-27017}:27017
 
 networks:
-  school-registration_net:
+  boom_net:
     driver: bridge
+
+volumes:
+  mongo-data:
