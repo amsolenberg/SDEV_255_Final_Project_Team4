@@ -4,7 +4,12 @@ const User = require('../../models/user');
 const isAuthenticated = require('../../middleware/auth');
 const router = express.Router();
 
-router.use(isAuthenticated);
+router.use(isAuthenticated, (req, res, next) => {
+    if (req.session.user.userType !== 'faculty') {
+        return res.redirect('/');
+    }
+    next();
+});
 
 // GET all faculty
 router.get('/', async (req, res) => {

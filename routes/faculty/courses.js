@@ -5,7 +5,12 @@ const Student = require('../../models/Student');
 const router = express.Router();
 const isAuthenticated = require('../../middleware/auth');
 
-router.use(isAuthenticated);
+router.use(isAuthenticated, (req, res, next) => {
+    if (req.session.user.userType !== 'faculty') {
+        return res.redirect('/');
+    }
+    next();
+});
 
 // GET course list
 router.get('/', async (req, res) => {

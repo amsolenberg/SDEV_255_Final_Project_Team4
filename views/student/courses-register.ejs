@@ -1,0 +1,54 @@
+<html>
+<%- include('../partials/head.ejs') %>
+<body>
+<%- include('../partials/nav.ejs') %>
+<% if (success && success.length > 0) { %>
+    <div class="alert alert-success"><%= success %></div>
+<% } %>
+<% if (error && error.length > 0) { %>
+    <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<div class="container py-5">
+    <h1 class="text-center">Enroll in Courses</h1>
+    <% if (courses.length > 0) { %>
+        <form action="/student/courses/register" method="POST">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Course Name</th>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th>Credits</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% courses.forEach(course => { %>
+                    <tr>
+                        <td>
+                            <input
+                                    type="checkbox"
+                                    name="courseIds"
+                                    value="<%= course._id %>"
+                                    <%= enrolledCourses.some(enrolled => enrolled._id.toString() === course._id.toString()) ? 'checked' : '' %>
+                            >
+                        </td>
+                        <td><%= course.name %></td>
+                        <td><%= course.code %></td>
+                        <td><%= course.description %></td>
+                        <td class="text-center"><%= course.credits %></td>
+                    </tr>
+                <% }); %>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Enroll</button>
+        </form>
+    <% } else { %>
+        <p class="text-center text-muted">No courses available for enrollment.</p>
+    <% } %>
+</div>
+
+<%- include('../partials/footer.ejs') %>
+</body>
+</html>
