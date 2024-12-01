@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../../models/User');
 const Course = require('../../models/Course');
+const Student = require('../../models/Student');
 const router = express.Router();
 const isAuthenticated = require('../../middleware/auth');
 
@@ -9,7 +10,22 @@ router.use(isAuthenticated);
 // GET course list
 router.get('/', async (req, res) => {
     try {
-        const courses = await Course.find({}).populate('faculty', 'firstName lastName');
+        const courses = await Course.find({}).populate('faculty', 'firstName lastName').lean();
+
+        const courseEnrollmentCounts = await Student.aggregate([
+            {$unwind: '$enrollments'},
+            {$group: {_id: '$enrollments.course', count: {$sum: 1}}}
+        ])
+
+        const enrollmentMap = courseEnrollmentCounts.reduce((map, entry) => {
+            map[entry._id.toString()] = entry.count;
+            return map;
+        }, {});
+
+        courses.forEach(course => {
+            course.enrollmentCount = enrollmentMap[course._id.toString()] || 0;
+        })
+
         res.render('faculty/courses-list', {courses, title: 'Manage Courses'});
     } catch (error) {
         console.error('Error fetching courses:', error);

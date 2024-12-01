@@ -20,6 +20,8 @@
                 <th>Code</th>
                 <th>Description</th>
                 <th>Credits</th>
+                <th>Instructor</th>
+                <th>Enrolled Students</th>
             </tr>
             </thead>
             <tbody>
@@ -28,7 +30,15 @@
                     <td><%= course.name %></td>
                     <td><%= course.code %></td>
                     <td><%= course.description %></td>
-                    <td><%= course.credits %></td>
+                    <td class="text-center"><%= course.credits %></td>
+                    <td>
+                        <% if (course.faculty) { %>
+                            <%= course.faculty.firstName + ' ' + course.faculty.lastName %>
+                        <% } else { %>
+                            <span class="text-muted">Unassigned</span>
+                        <% } %>
+                    </td>
+                    <td class="text-center"><%= course.enrollmentCount || 0 %></td>
                 </tr>
             <% }) %>
             </tbody>

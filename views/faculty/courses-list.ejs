@@ -17,7 +17,7 @@
         <a href="/faculty/courses/add" class="btn btn-primary">Add New Course</a>
     </div>
 
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
         <thead>
         <tr>
             <th>Course Name</th>
@@ -25,6 +25,7 @@
             <th>Description</th>
             <th>Credits</th>
             <th>Instructor</th>
+            <th>Students</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -42,6 +43,7 @@
                         <span class="text-muted">Unassigned</span>
                     <% } %>
                 </td>
+                <td><%= course.enrollmentCount %></td>
                 <td>
                     <a href="/faculty/courses/edit/<%= course._id %>" class="btn btn-sm btn-warning">Edit</a>
                     <form action="/faculty/courses/delete/<%= course._id %>" method="POST" class="d-inline">

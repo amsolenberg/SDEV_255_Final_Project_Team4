@@ -75,4 +75,58 @@ router.post('/password-change', isAuthenticated, async (req, res) => {
     }
 })
 
+// POST unenroll student from a course
+router.post('/unenroll', isAuthenticated, async (req, res) => {
+    const {courseId} = req.body;
+
+    try {
+        const student = await Student.findOne({user: req.session.user._id});
+
+        if (!student) {
+            req.flash('error', 'Student record not found.');
+            return res.redirect('/profile');
+        }
+
+        // Remove the course from enrollments
+        student.enrollments = student.enrollments.filter(enrollment => enrollment.course.toString() !== courseId);
+        await student.save();
+
+        req.flash('success', 'Successfully unenrolled from the course.');
+        res.redirect('/profile');
+    } catch (error) {
+        console.error('Error unenrolling from course:', error);
+        req.flash('error', 'An error occurred. Please try again.');
+        res.redirect('/profile');
+    }
+});
+
+// POST remove course from faculty association
+router.post('/remove-course', isAuthenticated, async (req, res) => {
+    const {courseId} = req.body;
+
+    try {
+        const course = await Course.findById(courseId);
+
+        if (!course) {
+            req.flash('error', 'Course not found.');
+            return res.redirect('/profile');
+        }
+
+        // Remove faculty association
+        if (course.faculty.toString() === req.session.user._id) {
+            course.faculty = null;
+            await course.save();
+            req.flash('success', 'Successfully removed from the course.');
+        } else {
+            req.flash('error', 'You are not associated with this course.');
+        }
+
+        res.redirect('/profile');
+    } catch (error) {
+        console.error('Error removing course association:', error);
+        req.flash('error', 'An error occurred. Please try again.');
+        res.redirect('/profile');
+    }
+});
+
 module.exports = router;

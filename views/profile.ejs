@@ -95,6 +95,7 @@
                                 <th>Class Name</th>
                                 <th>Code</th>
                                 <th>Credits</th>
+                                <th>Action</th> <!-- Added Action column -->
                             </tr>
                             </thead>
                             <tbody>
@@ -103,6 +104,15 @@
                                     <td><%= data.name %></td>
                                     <td><%= data.code %></td>
                                     <td><%= data.credits %></td>
+                                    <td>
+                                        <form action="/profile/<%= user.userType === 'student' ? 'unenroll' : 'remove-course' %>"
+                                              method="POST">
+                                            <input type="hidden" name="courseId" value="<%= data._id %>">
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <%= user.userType === 'student' ? 'Unenroll' : 'Remove' %>
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                             <% }); %>
                             </tbody>
