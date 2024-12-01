@@ -10,9 +10,28 @@
     <div class="alert alert-danger"><%= error %></div>
 <% } %>
 
-<div class="not-found-content">
-    Well, this is embarrassing. This page seems to be missing.
-</div>
+<section class="error-page text-center py-5">
+    <div class="container">
+        <h1 class="display-1 fw-bold text-danger">404</h1>
+        <p class="lead mb-4">Oops! The page you’re looking for seems to have gone on a wild adventure!</p>
+        <img
+                src="../public/images/404.webp"
+                alt="Lost Chainsaw"
+                class="img-fluid my-4"
+                style="max-width: 400px;"
+        />
+        <p>
+            Don’t worry—we’ll help you find your way. Use the buttons below to get back on track or go back to your last known location.
+        </p>
+        <div class="mt-4">
+            <a href="/" class="btn btn-primary btn-lg">Go Home</a>
+            <button onclick="history.back()" class="btn btn-secondary btn-lg">Take Me Back</button>
+        </div>
+        <p class="mt-4 text-muted">
+            If you think this is a mistake, report it to the admin. Or, maybe try not swinging your Boomstick at the URL bar next time!
+        </p>
+    </div>
+</section>
 
 <%- include('./partials/footer.ejs') %>
 </body>
