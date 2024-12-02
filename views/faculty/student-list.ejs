@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
 <%- include('../partials/head.ejs') %>
 <body>
 <%- include('../partials/nav.ejs') %>
@@ -39,11 +39,23 @@
                     <% if (student.enrollments.length > 0) { %>
                         <ul>
                             <% student.enrollments.forEach(enrollment => { %>
-                                <li><%= enrollment.course.name %></li>
+                                <% if (enrollment.course && enrollment.course.name) { %>
+                                    <li><%= enrollment.course.name %></li>
+                                <% } else { %>
+                                    <li>
+                                        <em>Unknown Course</em>
+                                        <% if (user.userType === 'faculty' || user.userType === 'admin') { %>
+                                            <a href="/faculty/enrollment/resolve/<%= student._id %>/<%= enrollment._id %>"
+                                               class="btn btn-warning btn-sm">
+                                                Resolve
+                                            </a>
+                                        <% } %>
+                                    </li>
+                                <% } %>
                             <% }); %>
                         </ul>
                     <% } else { %>
-                        <span class="text-muted">Not enrolled in any courses</span>
+                        <p>No enrollments found.</p>
                     <% } %>
                 </td>
                 <td>

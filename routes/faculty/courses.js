@@ -103,12 +103,94 @@ router.post('/edit/:id', async (req, res) => {
 // POST delete course
 router.post('/delete/:id', async (req, res) => {
     try {
-        await Course.findByIdAndDelete(req.params.id);
+        const courseId = req.params.id;
+
+        const studentsWithCourse = await Student.find({'enrollments.course': courseId});
+
+        if (studentsWithCourse.length > 0) {
+            req.flash(
+                'error',
+                'Cannot delete this course. Students are currently enrolled in it.'
+            );
+            return res.redirect('/faculty/courses');
+        }
+
+        await Course.findByIdAndDelete(courseId);
+
+        req.flash('success', 'Course deleted successfully.');
         res.redirect('/faculty/courses');
     } catch (error) {
         console.error('Error deleting course:', error);
-        res.status(500).send('Internal Server Error');
+        req.flash('error', 'An error occurred while deleting the course.');
+        res.redirect('/faculty/courses');
     }
-})
+});
+
+// GET resolve broken enrollment
+router.get('/enrollment/resolve/:studentId/:enrollmentId', async (req, res) => {
+    const {studentId, enrollmentId} = req.params;
+
+    try {
+        const student = await Student.findById(studentId).populate('user');
+
+        if (!student) {
+            req.flash('error', 'Student not found.');
+            return res.redirect('/faculty/students');
+        }
+
+        const enrollment = student.enrollments.find(
+            (e) => e._id.toString() === enrollmentId
+        );
+
+        if (!enrollment) {
+            req.flash('error', 'Enrollment not found.');
+            return res.redirect('/faculty/students');
+        }
+
+        res.render('faculty/resolve-enrollment', {
+            student,
+            enrollmentId,
+            title: 'Resolve Broken Enrollment',
+        });
+    } catch (error) {
+        console.error('Error loading resolve enrollment page:', error);
+        req.flash('error', 'An error occurred while loading the page.');
+        res.redirect('/faculty/students');
+    }
+});
+
+// POST resolve broken enrollment
+router.post('/enrollment/resolve/:studentId/:enrollmentId', async (req, res) => {
+    const { studentId, enrollmentId } = req.params;
+
+    try {
+        const student = await Student.findById(studentId);
+
+        if (!student) {
+            req.flash('error', 'Student not found.');
+            return res.redirect('/faculty/students');
+        }
+
+        const enrollmentIndex = student.enrollments.findIndex(
+            (e) => e._id.toString() === enrollmentId
+        );
+
+        if (enrollmentIndex === -1) {
+            req.flash('error', 'Enrollment not found.');
+            return res.redirect('/faculty/students');
+        }
+
+        // Remove the invalid enrollment
+        student.enrollments.splice(enrollmentIndex, 1);
+        await student.save();
+
+        req.flash('success', 'Invalid enrollment resolved.');
+        res.redirect('/faculty/students');
+    } catch (error) {
+        console.error('Error resolving enrollment:', error);
+        req.flash('error', 'An error occurred while resolving the enrollment.');
+        res.redirect('/faculty/students');
+    }
+});
 
 module.exports = router;
