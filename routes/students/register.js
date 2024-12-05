@@ -15,13 +15,24 @@ router.use(isAuthenticated, (req, res, next) => {
 // GET courses for enrollment
 router.get('/courses/register', async (req, res) => {
     try {
-        const student = await Student.findOne({user: req.session.user._id}).populate('enrollments.course');
-        const courses = await Course.find();
+        const student = await Student.findOne({ user: req.session.user._id })
+            .populate('enrollments.course')
+            .populate('cart.course');
 
-        // Get the enrolled courses
+        const courses = await Course.find(); // Fetch all available courses
+
+        // Courses the student is already enrolled in
         const enrolledCourses = student ? student.enrollments.map(e => e.course) : [];
 
-        res.render('student/courses-register', {courses, enrolledCourses, title: 'Register for Courses'});
+        // Courses in the student's cart
+        const cart = student ? student.cart : [];
+
+        res.render('student/courses-register', {
+            courses,
+            enrolledCourses,
+            cart,
+            title: 'Register for Courses',
+        });
     } catch (error) {
         console.error('Error fetching courses:', error);
         res.status(500).send('Internal Server Error');

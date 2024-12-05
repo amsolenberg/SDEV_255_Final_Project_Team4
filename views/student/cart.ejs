@@ -1,0 +1,63 @@
+<html>
+  <%- include('../partials/head.ejs') %>
+  <body>
+    <%- include('../partials/nav.ejs') %>
+
+    <main class="container py-5">
+      <h1 class="text-center mb-4">My Cart</h1>
+
+      <% if (cart.length > 0) { %>
+      <form action="/student/cart/enroll" method="POST">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Course Name</th>
+              <th>Code</th>
+              <th>Credits</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% cart.forEach(item => { %>
+            <tr>
+              <td><%= item.course.name %></td>
+              <td><%= item.course.code %></td>
+              <td><%= item.course.credits %></td>
+              <td>
+                <button type="button" class="btn btn-sm btn-danger" onclick="removeFromCart('<%= item.course._id %>')">
+                  Remove
+                </button>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+        <div class="text-end">
+          <button type="submit" class="btn btn-primary">Enroll in Selected Courses</button>
+        </div>
+      </form>
+      <% } else { %>
+      <p class="text-muted text-center">Your cart is empty.</p>
+      <% } %>
+    </main>
+
+    <%- include('../partials/footer.ejs') %>
+
+    <script>
+      function removeFromCart(courseId) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/student/cart/remove';
+
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'courseId';
+        input.value = courseId;
+
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+      }
+    </script>
+  </body>
+</html>

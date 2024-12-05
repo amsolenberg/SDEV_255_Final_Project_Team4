@@ -7,6 +7,11 @@
             <a href="/student/courses/register" class="nav-link">Enroll</a>
         </li>
         <li class="nav-item">
+            <a href="/student/cart" class="nav-link">
+                Cart<% if (cartCount > 0) { %> (<span class="badge bg-primary"><%= cartCount %></span>)<% } %>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="/logout" class="nav-link">Logout</a>
         </li>
     </ul>
