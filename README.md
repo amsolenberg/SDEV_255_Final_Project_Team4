@@ -1,6 +1,6 @@
 # SDEV 255 Final Project: Online School Registration System
 
-This repository contains the source code for an **Online School Registration System**, developed as the final project for SDEV 255 by Team 4. The application supports course management, user authentication, and student enrollments.
+This repository contains the source code for an Online School Registration System, developed as the final project for SDEV 255 by Team 4. The application supports course management, user authentication, student enrollments, and a shopping cart feature for students.
 
 ## Table of Contents
 
@@ -29,12 +29,16 @@ This web-based system enables students to enroll in courses, faculty to manage t
 
 ### Students
 - View all available courses.
-- Enroll in or unenroll from courses.
-- View enrolled courses on their profile.
+- Add courses to a shopping cart for later enrollment.
+- Enroll in courses from the shopping cart.
+- Remove courses from the shopping cart.
+- Manage enrolled courses from their profile page.
 
 ### Faculty
 - Manage courses (add, edit, delete).
+- Assign themselves as instructors to courses or assign other faculty members.
 - View assigned courses and associated enrolled students.
+- Prevented from deleting courses they did not create.
 
 ## Technologies Used
 
@@ -90,88 +94,35 @@ Visit http://localhost:3000 in your browser
 ### Students
 
 1. Register an account as a student.
-2. Log in and navigate to the "Courses" page to view available courses.
-3. Enroll in courses by selecting them from the list.
-4. Manage your enrolled courses from your profile page.
+2. Log in and navigate to the "Available Courses" page to view courses.
+3. Add courses to the shopping cart by clicking the "Add to Cart" button.
+4. Navigate to the "Cart" page to manage courses in the cart or proceed to enrollment.
+5. Enroll in selected courses directly from the cart.
+6. Manage enrolled courses from your profile page.
 
 ### Faculty
 
 1. Register an account as a faculty member.
 2. Log in and navigate to the "Manage Courses" page to add, edit, or delete courses.
 3. Assign yourself to courses or manage existing assignments.
+4. Prevent deletion of courses created by other faculty members.
 
 ## Project Structure
 
-```
+```plaintext
 .
 ├── env/                  # Environment variable files
-│   ├── app.env
-│   ├── database.env
-│   └── mongo.env
 ├── middleware/           # Middleware functions
-│   └── auth.js
 ├── models/               # Mongoose schemas
-│   ├── course.js
-│   ├── enrollments.js
-│   ├── faculty.js
-│   ├── student.js
-│   └── user.js
 ├── node_modules/         # Node.js dependencies
 ├── public/               # Static assets
-│   ├── boomstick-logo.webp
-│   ├── hero.webp
-│   └── styles.css
 ├── routes/               # Express routes
-│   ├── faculty/
-│   │   ├── courses.js
-│   │   ├── faculty.js
-│   │   └── students.js
-│   ├── students/
-│   │   └── register.js
-│   ├── courses.js
-│   ├── facultyRoutes.js
-│   ├── index.js
-│   ├── login.js
-│   ├── logout.js
-│   ├── profile.js
-│   ├── register.js
-│   ├── static.js
-│   └── studentRoutes.js
 ├── scripts/              # Utility scripts
-│   └── generateSecret.js
 ├── views/                # EJS templates for server-side rendering
-│   ├── faculty/
-│   │   ├── course-add.ejs
-│   │   ├── course-edit.ejs
-│   │   ├── course-list.ejs
-│   │   ├── faculty-add.ejs
-│   │   ├── faculty-edit.ejs
-│   │   ├── faculty-list.ejs
-│   │   ├── student-add.ejs
-│   │   ├── student-edit.ejs
-│   │   └── student-list.ejs
-│   ├── partials/
-│   │   ├── footer.ejs
-│   │   ├── head.ejs
-│   │   ├── nav.ejs
-│   │   ├── nav-faculty.ejs
-│   │   └── nav-student.ejs
-│   ├── student/
-│   │   └── courses-register.ejs
-│   ├── 404.ejs
-│   ├── course-list.ejs
-│   ├── index.ejs
-│   ├── login.ejs
-│   ├── privacy-policy.ejs
-│   ├── profile.ejs
-│   ├── register.ejs
-│   └── terms.ejs
-├── .gitignore            # Git ignore rules
 ├── app.js                # Main application entry point
 ├── db.js                 # Database connection logic
 ├── docker-compose.yml    # Docker setup
 ├── LICENSE               # License information
-├── middlewares.js        # General middleware setup
 ├── package.json          # Node.js dependencies
 ├── package-lock.json     # Lockfile for Node.js dependencies
 └── README.md             # Project documentation
