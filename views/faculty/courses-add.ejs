@@ -31,6 +31,17 @@
             <input type="number" class="form-control" id="credits" name="credits" required>
         </div>
         <div class="mb-3">
+            <label for="createdBy" class="form-label">Course Owner</label>
+            <select name="createdBy" id="createdBy" class="form-select" required>
+                <% facultyList.forEach(faculty => { %>
+                    <option value="<%= faculty._id %>" 
+                        <%= faculty._id.toString() === user._id.toString() ? 'selected' : '' %>>
+                        <%= faculty.firstName.charAt(0) + '. ' + faculty.lastName %>
+                    </option>
+                <% }); %>
+            </select>
+        </div>
+        <div class="mb-3">
             <label for="faculty" class="form-label">Assign Instructor (Optional)</label>
             <select name="faculty" id="faculty" class="form-select">
                 <option value="">-- Select an Instructor --</option>
